@@ -15,7 +15,7 @@ fantasy-themed naming, testimonials, and easter eggs.
 
 ## Product Roadmap
 
-### Phase 1 — Viral Launch (Week 1–2)
+### Phase 1 — Viral Launch
 
 - Ship the landing page (done)
 - Merch store (print-on-demand via Printful/Printify, zero inventory)
@@ -24,7 +24,7 @@ fantasy-themed naming, testimonials, and easter eggs.
 - Email capture on the site ("Join the Fellowship" — early access to tools)
 - Social launch: Hacker News, Reddit r/programming, dev Twitter/Bluesky
 
-### Phase 2 — Bot Tools (Week 2–6)
+### Phase 2 — Bot Tools
 
 Two GitHub App integrations with a fantasy-themed comedic voice:
 
@@ -70,7 +70,7 @@ Why it works: CI status comments are wallpaper — people scroll past them.
 A distinctive voice cuts through. The utility is surfacing CI health and
 review hygiene clearly.
 
-### Phase 3 — Monetisation (Week 6–12)
+### Phase 3 — Monetisation
 
 - **Free tier:** Core bot functionality with default triggers and responses.
 - **Paid tier ($3–5/month per repo):**
