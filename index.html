@@ -1,0 +1,951 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GitHobbit - Where Middle-earth Ships Code</title>
+  <style>
+    /* ── Reset & Base ──────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      /* Valinor mode (light) */
+      --bg-primary: #0d1117;
+      --bg-secondary: #161b22;
+      --bg-tertiary: #1c2128;
+      --text-primary: #e6edf3;
+      --text-secondary: #8b949e;
+      --text-muted: #6e7681;
+      --accent: #58a649;
+      --accent-hover: #6fbf5e;
+      --accent-dark: #2ea043;
+      --border: #30363d;
+      --gold: #d4a843;
+      --gold-glow: #e8c55a;
+      --mithril: #c9d1d9;
+      --mordor-red: #da3633;
+      --shire-green: #58a649;
+      --rivendell-blue: #58a6ff;
+      --ring-gold: #ffd700;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    a { color: var(--rivendell-blue); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* ── Nav ───────────────────────────────────────────── */
+    .nav {
+      background: var(--bg-secondary);
+      border-bottom: 1px solid var(--border);
+      padding: 16px 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .nav-left {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--text-primary);
+      font-weight: 600;
+      font-size: 1.1rem;
+    }
+
+    .nav-logo:hover { color: var(--text-primary); text-decoration: none; }
+
+    .logo-icon {
+      width: 36px;
+      height: 36px;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* CSS Octohobbit - a hobbit foot with tentacles */
+    .octohobbit {
+      font-size: 28px;
+      line-height: 1;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 20px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--text-primary); text-decoration: none; }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .nav-search {
+      background: var(--bg-primary);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 5px 12px;
+      color: var(--text-secondary);
+      font-size: 0.85rem;
+      width: 280px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-search kbd {
+      background: var(--bg-tertiary);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 1px 6px;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    .btn {
+      padding: 6px 16px;
+      border-radius: 6px;
+      font-size: 0.875rem;
+      font-weight: 500;
+      border: 1px solid var(--border);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--text-primary);
+      border-color: var(--border);
+    }
+
+    .btn-secondary:hover { background: var(--bg-tertiary); }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+      border-color: var(--accent);
+    }
+
+    .btn-primary:hover { background: var(--accent-hover); }
+
+    .btn-gold {
+      background: linear-gradient(135deg, var(--gold), var(--gold-glow));
+      color: #1a1200;
+      border: none;
+      font-weight: 600;
+    }
+
+    .btn-gold:hover {
+      filter: brightness(1.1);
+      box-shadow: 0 0 20px rgba(212, 168, 67, 0.3);
+    }
+
+    /* ── Hero ──────────────────────────────────────────── */
+    .hero {
+      text-align: center;
+      padding: 100px 32px 80px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 800px;
+      height: 800px;
+      background: radial-gradient(circle, rgba(88, 166, 73, 0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      background: var(--bg-tertiary);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 4px 16px;
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      margin-bottom: 24px;
+    }
+
+    .hero-badge .new { color: var(--gold); font-weight: 600; margin-right: 6px; }
+
+    .hero h1 {
+      font-size: 4rem;
+      font-weight: 800;
+      line-height: 1.1;
+      margin-bottom: 24px;
+      max-width: 900px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .hero h1 .green { color: var(--shire-green); }
+    .hero h1 .gold { color: var(--gold); }
+
+    .hero-subtitle {
+      font-size: 1.25rem;
+      color: var(--text-secondary);
+      max-width: 600px;
+      margin: 0 auto 40px;
+      line-height: 1.5;
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .hero-cta .btn {
+      padding: 12px 28px;
+      font-size: 1rem;
+    }
+
+    .hero-input-group {
+      display: flex;
+      gap: 8px;
+      justify-content: center;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+    }
+
+    .hero-input {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 12px 16px;
+      color: var(--text-primary);
+      font-size: 1rem;
+      width: 300px;
+    }
+
+    .hero-input::placeholder { color: var(--text-muted); }
+
+    .hero-trust {
+      margin-top: 48px;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+    }
+
+    .hero-trust strong { color: var(--text-secondary); }
+
+    /* ── Features Grid ────────────────────────────────── */
+    .features {
+      padding: 80px 32px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .features-header {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+
+    .features-header h2 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+
+    .features-header p {
+      color: var(--text-secondary);
+      font-size: 1.1rem;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 24px;
+    }
+
+    .feature-card {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 32px;
+      transition: border-color 0.3s, transform 0.2s;
+    }
+
+    .feature-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-2px);
+    }
+
+    .feature-icon {
+      font-size: 2rem;
+      margin-bottom: 16px;
+      display: block;
+    }
+
+    .feature-card h3 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .feature-card p {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+    .feature-card .tag {
+      display: inline-block;
+      background: var(--bg-tertiary);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 2px 10px;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-top: 12px;
+    }
+
+    /* ── Stats Banner ─────────────────────────────────── */
+    .stats {
+      padding: 60px 32px;
+      text-align: center;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      background: var(--bg-secondary);
+    }
+
+    .stats-grid {
+      display: flex;
+      justify-content: center;
+      gap: 80px;
+      flex-wrap: wrap;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .stat-item h3 {
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: var(--text-primary);
+    }
+
+    .stat-item h3 .gold { color: var(--gold); }
+
+    .stat-item p {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      margin-top: 4px;
+    }
+
+    /* ── Testimonials ─────────────────────────────────── */
+    .testimonials {
+      padding: 80px 32px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .testimonials h2 {
+      text-align: center;
+      font-size: 2rem;
+      margin-bottom: 48px;
+    }
+
+    .testimonial-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+    }
+
+    .testimonial {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 28px;
+    }
+
+    .testimonial-quote {
+      font-style: italic;
+      color: var(--text-secondary);
+      margin-bottom: 16px;
+      line-height: 1.6;
+    }
+
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .testimonial-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--bg-tertiary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+    }
+
+    .testimonial-name {
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+
+    .testimonial-role {
+      color: var(--text-muted);
+      font-size: 0.8rem;
+    }
+
+    /* ── CTA Section ──────────────────────────────────── */
+    .cta-section {
+      text-align: center;
+      padding: 100px 32px;
+      position: relative;
+    }
+
+    .cta-section::before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 600px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(212, 168, 67, 0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .cta-section h2 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+
+    .cta-section p {
+      color: var(--text-secondary);
+      font-size: 1.1rem;
+      margin-bottom: 32px;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* ── Footer ───────────────────────────────────────── */
+    .footer {
+      border-top: 1px solid var(--border);
+      padding: 40px 32px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr repeat(4, 1fr);
+      gap: 40px;
+      margin-bottom: 40px;
+    }
+
+    .footer-brand p {
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      margin-top: 12px;
+      line-height: 1.6;
+    }
+
+    .footer-col h4 {
+      color: var(--text-secondary);
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 16px;
+    }
+
+    .footer-col ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .footer-col a {
+      color: var(--text-muted);
+      font-size: 0.85rem;
+    }
+
+    .footer-col a:hover { color: var(--text-primary); }
+
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+      color: var(--text-muted);
+      font-size: 0.8rem;
+    }
+
+    .footer-bottom-links {
+      display: flex;
+      gap: 20px;
+    }
+
+    .footer-bottom-links a { color: var(--text-muted); font-size: 0.8rem; }
+
+    /* ── The One Ring (Easter Egg) ─────────────────────── */
+    .ring-cursor {
+      display: none;
+      position: fixed;
+      pointer-events: none;
+      font-size: 24px;
+      z-index: 9999;
+      transition: opacity 0.3s;
+      text-shadow: 0 0 10px var(--ring-gold), 0 0 20px var(--ring-gold);
+    }
+
+    /* ── Tengwar inscription (subtle) ─────────────────── */
+    .tengwar {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      opacity: 0.3;
+      letter-spacing: 2px;
+      text-align: center;
+      padding: 8px;
+      transition: opacity 0.5s, color 0.5s;
+    }
+
+    .tengwar:hover {
+      opacity: 1;
+      color: var(--ring-gold);
+      text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+    }
+
+    /* ── Responsive ───────────────────────────────────── */
+    @media (max-width: 768px) {
+      .hero h1 { font-size: 2.5rem; }
+      .nav-search, .nav-links { display: none; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+      .stats-grid { gap: 40px; }
+    }
+
+    /* ── Konami / Easter Egg animations ───────────────── */
+    @keyframes ringPulse {
+      0%, 100% { text-shadow: 0 0 10px var(--ring-gold); }
+      50% { text-shadow: 0 0 30px var(--ring-gold), 0 0 60px rgba(255, 215, 0, 0.3); }
+    }
+
+    .ring-active {
+      animation: ringPulse 2s infinite;
+    }
+
+    .mordor-mode {
+      --bg-primary: #0a0000;
+      --bg-secondary: #1a0505;
+      --bg-tertiary: #2a0a0a;
+      --accent: #da3633;
+      --accent-hover: #f85149;
+      --border: #3d1010;
+    }
+
+    .mordor-mode .hero::before {
+      background: radial-gradient(circle, rgba(218, 54, 51, 0.1) 0%, transparent 70%);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── Navigation ──────────────────────────────────── -->
+  <nav class="nav">
+    <div class="nav-left">
+      <a href="#" class="nav-logo">
+        <span class="octohobbit" title="The Octohobbit">🦶</span>
+        GitHobbit
+      </a>
+      <ul class="nav-links">
+        <li><a href="#">Product</a></li>
+        <li><a href="#">Solutions</a></li>
+        <li><a href="#">Open Sauce</a></li>
+        <li><a href="#">Pricing</a></li>
+      </ul>
+    </div>
+    <div class="nav-right">
+      <div class="nav-search">
+        <span>Search or jump to the Shire...</span>
+        <kbd>/</kbd>
+      </div>
+      <button class="btn btn-secondary" onclick="toggleMordorMode()">Sign in</button>
+      <button class="btn btn-primary">Sign up</button>
+    </div>
+  </nav>
+
+  <!-- ── Hero ────────────────────────────────────────── -->
+  <section class="hero">
+    <div class="hero-badge">
+      <span class="new">New</span> Gandalf Copilot now available in Early Wizardry Preview
+    </div>
+    <h1>Where <span class="green">Middle-earth</span> ships <span class="gold">code</span></h1>
+    <p class="hero-subtitle">
+      The complete developer platform to build, scale, and deliver secure software.
+      From the comfort of your hobbit-hole.
+    </p>
+    <div class="hero-input-group">
+      <input type="email" class="hero-input" placeholder="bilbo@bag-end.shire">
+      <button class="btn btn-gold">Start your quest</button>
+    </div>
+    <p class="hero-trust">
+      Trusted by <strong>the Free Peoples of Middle-earth</strong> &mdash;
+      including 9 of the 9 members of the Fellowship.
+    </p>
+  </section>
+
+  <!-- ── Stats ───────────────────────────────────────── -->
+  <section class="stats">
+    <div class="stats-grid">
+      <div class="stat-item">
+        <h3><span class="gold">111+</span></h3>
+        <p>Bilbo's birthday-party repositorees</p>
+      </div>
+      <div class="stat-item">
+        <h3>7</h3>
+        <p>Rings for the Dwarf-lords<br>(3 are deprecated)</p>
+      </div>
+      <div class="stat-item">
+        <h3>1</h3>
+        <p>Ring to rule them all<br>(do not deploy)</p>
+      </div>
+      <div class="stat-item">
+        <h3>2nd</h3>
+        <p>Breakfast<br>(always supported)</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Features ────────────────────────────────────── -->
+  <section class="features">
+    <div class="features-header">
+      <h2>Everything your fellowship needs</h2>
+      <p>From Pull Quests to Grievances, GitHobbit has the tools to get your code from the Shire to production.</p>
+    </div>
+    <div class="features-grid">
+
+      <div class="feature-card">
+        <span class="feature-icon">🧙</span>
+        <h3>Gandalf Copilot</h3>
+        <p>A wizard is never late with code suggestions, nor is he early. He suggests precisely what he means to.</p>
+        <span class="tag">Powered by pipeweed</span>
+      </div>
+
+      <div class="feature-card">
+        <span class="feature-icon">⚔️</span>
+        <h3>Pull Quests</h3>
+        <p>Rally your fellowship to review changes before they reach the main branch. One does not simply merge into production.</p>
+        <span class="tag">Requires 2 approvals from the Council</span>
+      </div>
+
+      <div class="feature-card">
+        <span class="feature-icon">📜</span>
+        <h3>Grievances</h3>
+        <p>Track bugs, feature requests, and complaints about elevenses being removed from the build pipeline.</p>
+        <span class="tag">Now with Entmoot discussions</span>
+      </div>
+
+      <div class="feature-card">
+        <span class="feature-icon">🌳</span>
+        <h3>Treebeard (Dependabot)</h3>
+        <p>Don't be hasty with your dependencies. Treebeard reviews your package tree and ensures nothing is rotten in the forest of Fangorn.</p>
+        <span class="tag">Burarum!</span>
+      </div>
+
+      <div class="feature-card">
+        <span class="feature-icon">⭐</span>
+        <h3>Stars of Eärendil</h3>
+        <p>Light your favourite repositorees with the light of the Silmarils. May it be a light to you in dark places, when all other bookmarks have gone out.</p>
+        <span class="tag">Phial included</span>
+      </div>
+
+      <div class="feature-card">
+        <span class="feature-icon">🍴</span>
+        <h3>Forks of Saruman</h3>
+        <p>Create your own copy of any repositoree. But beware — the fork was once aligned to good, before it turned to its own dark purposes.</p>
+        <span class="tag">Use responsibly</span>
+      </div>
+
+      <div class="feature-card">
+        <span class="feature-icon">🏔️</span>
+        <h3>Deeds (Actions)</h3>
+        <p>Automate your CI/CD pipeline from Bag End to Mordor. Set up workflows that trigger on every push to the mountain.</p>
+        <span class="tag">Eagles available for deployment</span>
+      </div>
+
+      <div class="feature-card">
+        <span class="feature-icon">🗺️</span>
+        <h3>The Shire Pages</h3>
+        <p>Host your static sites and documentation directly from your repositoree. No Mordor cloud required — runs entirely on hobbit infrastructure.</p>
+        <span class="tag">Free for public repos</span>
+      </div>
+
+      <div class="feature-card">
+        <span class="feature-icon">🔒</span>
+        <h3>Mithril Security</h3>
+        <p>Secret scanning, vulnerability alerts, and dependency review — lighter than silk, harder than dragon-scale. Your code is safe within these walls.</p>
+        <span class="tag">You shall not pass (without auth)</span>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── Testimonials ────────────────────────────────── -->
+  <section class="testimonials">
+    <h2>Trusted across Middle-earth</h2>
+    <div class="testimonial-grid">
+
+      <div class="testimonial">
+        <p class="testimonial-quote">"I don't know half of my repos half as well as I should like; and I star less than half of them half as well as they deserve."</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">🧓</div>
+          <div>
+            <div class="testimonial-name">Bilbo Baggins</div>
+            <div class="testimonial-role">Senior Developer, Bag End Enterprises</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial">
+        <p class="testimonial-quote">"One does not simply push to main. We set up branch protection rules after the Boromir incident."</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">🗡️</div>
+          <div>
+            <div class="testimonial-name">Aragorn</div>
+            <div class="testimonial-role">Lead Maintainer, Gondor OSS Foundation</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial">
+        <p class="testimonial-quote">"My repos are available on all three mirrors. The light is quite good for code review at 4am."</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">🌟</div>
+          <div>
+            <div class="testimonial-name">Galadriel</div>
+            <div class="testimonial-role">Platform Architect, Lothlórien Cloud</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial">
+        <p class="testimonial-quote">"We've had one deployment, yes. But what about second deployment?"</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">🫕</div>
+          <div>
+            <div class="testimonial-name">Pippin</div>
+            <div class="testimonial-role">Junior DevOps, Tookborough Inc.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial">
+        <p class="testimonial-quote">"THEY'RE TAKING THE CODE TO ISENGARD! (Please read the incident report.)"</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">🏹</div>
+          <div>
+            <div class="testimonial-name">Legolas</div>
+            <div class="testimonial-role">Security Engineer, Mirkwood InfoSec</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial">
+        <p class="testimonial-quote">"Build times are 17 hours. Nobody tosses a Dwarf's Docker image."</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">⛏️</div>
+          <div>
+            <div class="testimonial-name">Gimli</div>
+            <div class="testimonial-role">Infrastructure, Erebor Data Centre</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── CTA ─────────────────────────────────────────── -->
+  <section class="cta-section">
+    <h2>The world is changed.</h2>
+    <p>Begin your quest with GitHobbit today. Free for individuals and small fellowships.</p>
+    <div class="hero-cta">
+      <button class="btn btn-gold" style="padding: 14px 32px; font-size: 1.05rem;">Sign up for GitHobbit</button>
+      <button class="btn btn-secondary" style="padding: 14px 32px; font-size: 1.05rem;">Talk to Elrond (Sales)</button>
+    </div>
+  </section>
+
+  <!-- ── Footer ──────────────────────────────────────── -->
+  <footer class="footer">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <span class="octohobbit" style="font-size: 2rem;">🦶</span>
+        <p>GitHobbit Inc. &copy; T.A. 3019<br>Built with love in the Shire.<br>Second breakfast served daily.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Product</h4>
+        <ul>
+          <li><a href="#">Deeds (CI/CD)</a></li>
+          <li><a href="#">Palantír Packages</a></li>
+          <li><a href="#">Mithril Security</a></li>
+          <li><a href="#">Gandalf Copilot</a></li>
+          <li><a href="#">Code Review (Council)</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Explore</h4>
+        <ul>
+          <li><a href="#">Trending in the Shire</a></li>
+          <li><a href="#">Collections (Hoards)</a></li>
+          <li><a href="#">Fellowship Topics</a></li>
+          <li><a href="#">The Shire Pages</a></li>
+          <li><a href="#">Marketplace of Dale</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="#">About (The Legendarium)</a></li>
+          <li><a href="#">Blog (The Red Book)</a></li>
+          <li><a href="#">Careers (Quests)</a></li>
+          <li><a href="#">Press (Heralds)</a></li>
+          <li><a href="#">Rivendell Office</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Support</h4>
+        <ul>
+          <li><a href="#">Docs (Scrolls)</a></li>
+          <li><a href="#">Community (Council)</a></li>
+          <li><a href="#">Status (Palantír)</a></li>
+          <li><a href="#">Contact Gandalf</a></li>
+          <li><a href="#">Premium Support (Eagles)</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="footer-bottom-links">
+        <a href="#">Terms of Fellowship</a>
+        <a href="#">Privacy (Invisibility Policy)</a>
+        <a href="#">Cookie Policy (Lembas)</a>
+        <a href="#">Sitemap of Middle-earth</a>
+      </div>
+      <span>Made with 🍄 in the Shire</span>
+    </div>
+
+    <!-- Secret inscription -->
+    <p class="tengwar" title="One Ring inscription, but for code">
+      ash git push-ishi, ash git merge-ishi, ash git blame-ishi, ash burzum-ishi krimpatul
+    </p>
+  </footer>
+
+  <!-- ── The One Ring Easter Egg (follows cursor on Konami code) ── -->
+  <div class="ring-cursor" id="ring">💍</div>
+
+  <script>
+    // ── Mordor Mode Toggle ──
+    function toggleMordorMode() {
+      document.body.classList.toggle('mordor-mode');
+      const btn = document.querySelector('.btn-secondary');
+      if (document.body.classList.contains('mordor-mode')) {
+        btn.textContent = 'Flee Mordor';
+        document.title = 'GitHobbit - One Does Not Simply Ship to Prod';
+      } else {
+        btn.textContent = 'Sign in';
+        document.title = 'GitHobbit - Where Middle-earth Ships Code';
+      }
+    }
+
+    // ── Konami Code Easter Egg → Ring follows cursor ──
+    const konamiCode = ['ArrowUp','ArrowUp','ArrowDown','ArrowDown',
+                        'ArrowLeft','ArrowRight','ArrowLeft','ArrowRight',
+                        'KeyB','KeyA'];
+    let konamiIndex = 0;
+    const ring = document.getElementById('ring');
+
+    document.addEventListener('keydown', (e) => {
+      if (e.code === konamiCode[konamiIndex]) {
+        konamiIndex++;
+        if (konamiIndex === konamiCode.length) {
+          activateOneRing();
+          konamiIndex = 0;
+        }
+      } else {
+        konamiIndex = 0;
+      }
+    });
+
+    function activateOneRing() {
+      ring.style.display = 'block';
+      ring.classList.add('ring-active');
+      document.addEventListener('mousemove', (e) => {
+        ring.style.left = e.clientX + 15 + 'px';
+        ring.style.top = e.clientY + 15 + 'px';
+      });
+      // Dramatic announcement
+      console.log('%c🔥 One Ring to rule them all, One Ring to find them, One Ring to bring them all, and in the darkness bind them. 🔥',
+        'color: gold; font-size: 16px; text-shadow: 0 0 10px red;');
+      // Auto-dismiss after 30 seconds
+      setTimeout(() => {
+        ring.style.display = 'none';
+        ring.classList.remove('ring-active');
+      }, 30000);
+    }
+
+    // ── Console Easter Egg ──
+    console.log(`
+      %c🧙 GitHobbit v3.019
+      %c"All that is gold does not glitter,
+       Not all who wander are lost;
+       The old that is strong does not wither,
+       Deep roots are not reached by git rebase --hard."
+
+       — Gandalf the Grey (Staff Engineer)
+    `, 'color: #58a649; font-size: 18px; font-weight: bold;',
+       'color: #d4a843; font-size: 12px; font-style: italic;');
+
+    // ── Keyboard shortcut: / focuses search ──
+    document.addEventListener('keydown', (e) => {
+      if (e.key === '/' && !e.target.matches('input, textarea')) {
+        e.preventDefault();
+        const search = document.querySelector('.nav-search');
+        search.style.borderColor = 'var(--rivendell-blue)';
+        setTimeout(() => search.style.borderColor = '', 1500);
+      }
+    });
+  </script>
+
+</body>
+</html>
