@@ -1,0 +1,116 @@
+{
+  "name": "creative_sprint",
+  "description": "Full creative content generation for GitHobbit launch — voice guides, merch slogans, and all page copy.",
+  "tasks": [
+    {
+      "task_id": "treebeard_voice",
+      "task_type": "creative",
+      "description": "Treebeard bot voice guide — vocabulary, sentence patterns, tone calibration, example comments",
+      "template": "creative_voice_treebeard",
+      "rubric": "creative_voice_v1",
+      "gate": "creative_voice_guide",
+      "review": true,
+      "variables": {}
+    },
+    {
+      "task_id": "gandalf_voice",
+      "task_type": "creative",
+      "description": "Gandalf bot voice guide — vocabulary, sentence patterns, tone calibration, example comments",
+      "template": "creative_voice_gandalf",
+      "rubric": "creative_voice_v1",
+      "gate": "creative_voice_guide",
+      "review": true,
+      "variables": {}
+    },
+    {
+      "task_id": "slogans_git",
+      "task_type": "creative",
+      "description": "10 merch slogans for git operations (merge, rebase, branch, etc.)",
+      "template": "creative_merch_slogans",
+      "rubric": "creative_slogan_v1",
+      "gate": "creative_slogan",
+      "review": true,
+      "variables": { "category": "git_operations", "count": "10" }
+    },
+    {
+      "task_id": "slogans_cicd",
+      "task_type": "creative",
+      "description": "10 merch slogans for CI/CD (pipelines, deploys, builds)",
+      "template": "creative_merch_slogans",
+      "rubric": "creative_slogan_v1",
+      "gate": "creative_slogan",
+      "review": true,
+      "variables": { "category": "ci_cd", "count": "10" }
+    },
+    {
+      "task_id": "slogans_review",
+      "task_type": "creative",
+      "description": "10 merch slogans for code review (PRs, approvals, nitpicks)",
+      "template": "creative_merch_slogans",
+      "rubric": "creative_slogan_v1",
+      "gate": "creative_slogan",
+      "review": true,
+      "variables": { "category": "code_review", "count": "10" }
+    },
+    {
+      "task_id": "pricing_page",
+      "task_type": "creative",
+      "description": "Pricing page copy with tier grid (Shire/Rivendell/Gondor/Valinor), FAQ, CTA",
+      "template": "creative_page_copy_pricing",
+      "rubric": "creative_page_copy_v1",
+      "gate": "creative_page_copy",
+      "review": true,
+      "variables": {}
+    },
+    {
+      "task_id": "treebeard_page",
+      "task_type": "creative",
+      "description": "Treebeard product page — hero, 4 feature blocks with mock GitHub comments, CTA",
+      "template": "creative_page_copy_treebeard",
+      "rubric": "creative_page_copy_v1",
+      "gate": "creative_page_copy",
+      "review": true,
+      "variables": {}
+    },
+    {
+      "task_id": "gandalf_page",
+      "task_type": "creative",
+      "description": "Gandalf product page — hero, 5 feature blocks with mock GitHub comments, CTA",
+      "template": "creative_page_copy_gandalf",
+      "rubric": "creative_page_copy_v1",
+      "gate": "creative_page_copy",
+      "review": true,
+      "variables": {}
+    },
+    {
+      "task_id": "about_page",
+      "task_type": "creative",
+      "description": "About page (The Legendarium) — overview, technical section, creator note",
+      "template": "creative_page_copy_about",
+      "rubric": "creative_page_copy_v1",
+      "gate": "creative_page_copy",
+      "review": true,
+      "variables": {}
+    },
+    {
+      "task_id": "404_page",
+      "task_type": "creative",
+      "description": "404 error page — fantasy headline, brief message, return-home CTA",
+      "template": "creative_page_copy_404",
+      "rubric": "creative_page_copy_v1",
+      "gate": "creative_page_copy",
+      "review": true,
+      "variables": {}
+    },
+    {
+      "task_id": "merch_page",
+      "task_type": "creative",
+      "description": "Merch store page — product grid with prices, storefront intro, CTA",
+      "template": "creative_page_copy_merch",
+      "rubric": "creative_page_copy_v1",
+      "gate": "creative_page_copy",
+      "review": true,
+      "variables": {}
+    }
+  ]
+}

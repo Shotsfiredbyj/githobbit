@@ -1,0 +1,57 @@
+{
+  "task_type": "creative_voice_guide",
+  "gates": [
+    {
+      "name": "required_sections",
+      "description": "Voice guide must contain all required sections",
+      "check": "section_presence",
+      "params": {
+        "sections": ["Character Core", "Vocabulary", "Sentence Patterns", "Tone Calibration", "Example Comments", "Anti-Patterns"]
+      },
+      "severity": "fail",
+      "error_message": "Missing required section(s): {missing}"
+    },
+    {
+      "name": "word_count",
+      "description": "Voice guide must be 1500–2500 words",
+      "check": "total_word_count",
+      "params": {
+        "min_words": 1500,
+        "max_words": 2500
+      },
+      "severity": "fail",
+      "error_message": "Word count {actual} is outside range 1500–2500"
+    },
+    {
+      "name": "has_examples",
+      "description": "Guide must contain at least one example comment with a placeholder variable",
+      "check": "min_matches",
+      "params": {
+        "min": 1,
+        "pattern": "\\{[a-z_]+\\}"
+      },
+      "severity": "fail",
+      "error_message": "No example comments with {variable} placeholders found"
+    },
+    {
+      "name": "no_dev_slang",
+      "description": "Voice guide must not contain common dev slang that breaks character",
+      "check": "no_match",
+      "params": {
+        "pattern": "(?i)\\b(LGTM|nit|ship it|PTAL|WFM|SGTM|TL;DR)\\b"
+      },
+      "severity": "fail",
+      "error_message": "Dev slang detected: \"{match}\" — voice guides must stay in character"
+    },
+    {
+      "name": "bot_self_reference",
+      "description": "Output must never acknowledge being a bot or AI",
+      "check": "no_match",
+      "params": {
+        "pattern": "(?i)(as an ai|i am a bot|i'm automated|i am automated|as a language model|i'm an ai|i am an ai)"
+      },
+      "severity": "hard_block",
+      "error_message": "Output contains bot self-reference: \"{match}\""
+    }
+  ]
+}

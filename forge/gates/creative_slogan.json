@@ -1,0 +1,59 @@
+{
+  "task_type": "creative_slogan",
+  "gates": [
+    {
+      "name": "item_count",
+      "description": "Batch must contain exactly the requested number of slogans",
+      "check": "item_count",
+      "params": {
+        "expected": "{count}",
+        "item_pattern": "^\\d+\\."
+      },
+      "severity": "fail",
+      "error_message": "Expected {count} slogans, found {actual}"
+    },
+    {
+      "name": "word_count",
+      "description": "Each slogan must be 10 words or fewer",
+      "check": "per_item_max_words",
+      "params": {
+        "max_words": 10,
+        "item_pattern": "^\\d+\\."
+      },
+      "severity": "fail",
+      "error_message": "Slogan exceeds 10 words: \"{item}\""
+    },
+    {
+      "name": "character_names",
+      "description": "At least 2 slogans must reference a named LOTR character",
+      "check": "min_matches",
+      "params": {
+        "min": 2,
+        "pattern": "(?i)(gandalf|frodo|sauron|aragorn|legolas|gimli|gollum|bilbo|samwise|treebeard|saruman|elrond|galadriel|boromir|faramir|theoden|th\u00e9oden|eowyn|\u00e9owyn|merry|pippin|radagast|denethor|celeborn|arwen|tom bombadil)"
+      },
+      "severity": "fail",
+      "error_message": "Only {actual} slogans contain named LOTR characters (need >= 2)"
+    },
+    {
+      "name": "product_type",
+      "description": "Each slogan must include a product type annotation",
+      "check": "min_matches",
+      "params": {
+        "min": "{count}",
+        "pattern": "(?i)\\((Sticker|T-shirt|Mug|Hoodie)\\)"
+      },
+      "severity": "fail",
+      "error_message": "Only {actual} slogans have product type annotations (need {count})"
+    },
+    {
+      "name": "no_footnotes",
+      "description": "No explanations, footnotes, or commentary between slogans",
+      "check": "no_match",
+      "params": {
+        "pattern": "(?i)(note:|explanation:|this slogan|this references|meaning:)"
+      },
+      "severity": "fail",
+      "error_message": "Unwanted commentary detected: \"{match}\""
+    }
+  ]
+}

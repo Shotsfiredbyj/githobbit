@@ -1,0 +1,31 @@
+{
+  "name": "GitHobbit",
+  "description": "Fantasy-themed developer tools — merch slogans, voice guides, page copy, bot templates.",
+
+  "output_dir": "outputs",
+  "log_dir": "logs",
+  "summary_dir": "summaries",
+
+  "defaults": {
+    "num_ctx": 32768,
+    "num_predict": 16384,
+    "temperature": 0.7
+  },
+
+  "model_preferences": {
+    "creative": "qwen3-next:80b-a3b-instruct-q4_K_M",
+    "code": "nemotron-3-super:120b",
+    "review": "nemotron-3-super:120b"
+  },
+
+  "thresholds": {
+    "creative": { "pass": 80, "flag": 60, "reject": 60 },
+    "code": { "pass": 85, "flag": 70, "reject": 55 }
+  },
+
+  "retry": {
+    "max_rounds": 3,
+    "max_attempts_per_round": 3,
+    "strategies": ["error_augmented", "de_anchored", "escalation"]
+  }
+}

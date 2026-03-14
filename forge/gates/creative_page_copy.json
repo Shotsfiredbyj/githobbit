@@ -1,0 +1,57 @@
+{
+  "task_type": "creative_page_copy",
+  "gates": [
+    {
+      "name": "required_sections",
+      "description": "Page must contain Hero, Features/content, and CTA sections",
+      "check": "section_presence",
+      "params": {
+        "sections": ["Hero", "CTA"]
+      },
+      "severity": "fail",
+      "error_message": "Missing required section(s): {missing}"
+    },
+    {
+      "name": "word_count",
+      "description": "Page copy must not exceed 500 words",
+      "check": "total_word_count",
+      "params": {
+        "min_words": 50,
+        "max_words": 500
+      },
+      "severity": "fail",
+      "error_message": "Word count {actual} is outside range 50–500"
+    },
+    {
+      "name": "has_cta",
+      "description": "Page must contain at least one call-to-action link or button",
+      "check": "min_matches",
+      "params": {
+        "min": 1,
+        "pattern": "\\[.+\\]\\(.+\\)"
+      },
+      "severity": "fail",
+      "error_message": "No CTA link found — page must have at least one [label](url) link"
+    },
+    {
+      "name": "no_dev_slang",
+      "description": "Page copy must not contain dev slang",
+      "check": "no_match",
+      "params": {
+        "pattern": "(?i)\\b(LGTM|nit|ship it|PTAL|WFM|SGTM|TL;DR|YOLO)\\b"
+      },
+      "severity": "warn",
+      "error_message": "Dev slang detected: \"{match}\""
+    },
+    {
+      "name": "bot_self_reference",
+      "description": "Output must never acknowledge being a bot or AI",
+      "check": "no_match",
+      "params": {
+        "pattern": "(?i)(as an ai|i am a bot|i'm automated|i am automated|as a language model|i'm an ai|i am an ai)"
+      },
+      "severity": "hard_block",
+      "error_message": "Output contains bot self-reference: \"{match}\""
+    }
+  ]
+}
