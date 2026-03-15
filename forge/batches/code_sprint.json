@@ -1,0 +1,26 @@
+{
+  "name": "code_sprint",
+  "description": "Cloudflare Worker webhook handlers for Treebeard and Gandalf bots.",
+  "tasks": [
+    {
+      "task_id": "treebeard_worker",
+      "task_type": "code",
+      "description": "Cloudflare Worker TypeScript scaffold for Treebeard bot — PR pacing, staleness, dependency health",
+      "template": "code_webhook_treebeard",
+      "rubric": "code_worker_v1",
+      "gate": "code_worker",
+      "review": true,
+      "variables": {}
+    },
+    {
+      "task_id": "gandalf_worker",
+      "task_type": "code",
+      "description": "Cloudflare Worker TypeScript scaffold for Gandalf bot — CI monitoring, approval checks, force push alerts",
+      "template": "code_webhook_gandalf",
+      "rubric": "code_worker_v1",
+      "gate": "code_worker",
+      "review": true,
+      "variables": {}
+    }
+  ]
+}
