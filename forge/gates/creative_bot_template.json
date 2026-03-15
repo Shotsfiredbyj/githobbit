@@ -1,0 +1,58 @@
+{
+  "task_type": "creative_bot_template",
+  "gates": [
+    {
+      "name": "item_count",
+      "description": "Batch must contain exactly the requested number of bot comment templates",
+      "check": "item_count",
+      "params": {
+        "expected": "{count}",
+        "item_pattern": "^\\d+\\."
+      },
+      "severity": "fail",
+      "error_message": "Expected {count} templates, found {actual}"
+    },
+    {
+      "name": "word_count",
+      "description": "Each template must be 30 words or fewer",
+      "check": "per_item_max_words",
+      "params": {
+        "max_words": 30,
+        "item_pattern": "^\\d+\\."
+      },
+      "severity": "fail",
+      "error_message": "Template exceeds 30 words: \"{item}\""
+    },
+    {
+      "name": "variable_presence",
+      "description": "Each template must contain at least one variable placeholder",
+      "check": "min_matches",
+      "params": {
+        "min": "{count}",
+        "pattern": "\\{[a-z_]+\\}"
+      },
+      "severity": "fail",
+      "error_message": "Only {actual} templates contain a variable placeholder (need {count})"
+    },
+    {
+      "name": "no_dev_slang",
+      "description": "No dev slang (LGTM, nit, etc.) in templates",
+      "check": "no_match",
+      "params": {
+        "pattern": "(?i)\\b(lgtm|nit|shipit|gtg|tj\\b|docs?|pr\\b|ci\\b|cd\\b)\\b"
+      },
+      "severity": "warn",
+      "error_message": "Dev slang detected: \"{match}\""
+    },
+    {
+      "name": "no_bot_self_reference",
+      "description": "No bot self-reference in templates",
+      "check": "no_match",
+      "params": {
+        "pattern": "(?i)(as an ai|i am a bot|i'm automated|i am automated|as a language model|i'm an ai|i am an ai)"
+      },
+      "severity": "fail",
+      "error_message": "Bot self-reference detected: \"{match}\""
+    }
+  ]
+}

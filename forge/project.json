@@ -4,7 +4,7 @@
 
   "output_dir": "outputs",
   "log_dir": "logs",
-  "summary_dir": "summaries",
+  "summaries_dir": "summaries",
 
   "defaults": {
     "num_ctx": 32768,
@@ -14,7 +14,7 @@
 
   "model_preferences": {
     "creative": "qwen3-next:80b-a3b-instruct-q4_K_M",
-    "code": "nemotron-3-super:120b",
+    "code": "gpt-oss:120b",
     "review": "nemotron-3-super:120b"
   },
 
