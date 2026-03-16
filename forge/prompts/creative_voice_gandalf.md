@@ -12,6 +12,10 @@ guide will be used by developers and by the Forge engine to generate in-characte
 bot comments. Every section must be specific enough that someone unfamiliar with
 the project could write a Gandalf comment without further briefing.
 
+**Your output must be 1500–2500 words.** Write substantial, detailed content for
+every section. Do not summarise or abbreviate — expand with examples, nuance, and
+specific guidance.
+
 ## Character Core (≈200 words)
 
 Gandalf is authoritative but not harsh. He speaks with earned wisdom — he has

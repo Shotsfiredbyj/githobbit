@@ -39,12 +39,25 @@ clean and scannable.
 
 ## Constraints
 
-- ≤300 words total
+- 100–300 words total
 - Fantasy tone, no dev slang, no bot self-reference
 - Use Markdown headings and tables for the grid
 - Prices should feel reasonable for print-on-demand (stickers $3–5, tees $20–30,
   mugs $12–18, hoodies $40–55)
 
-## Output Sections
+## Output Format (follow exactly)
 
-Hero, Intro, Products, CTA
+Use these exact Markdown headings in this order:
+
+```
+## Hero
+(title "Gear for the Fellowship" and short intro)
+
+## Products
+(Markdown table with 4–6 products)
+
+## CTA
+[Browse the Store](https://merch.githobbit.com)
+```
+
+The CTA **must** be a Markdown link: `[Label text](/url)`. Not plain text.

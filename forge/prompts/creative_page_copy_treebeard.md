@@ -39,13 +39,26 @@ practices, delivered in a slow, deliberate, tree-like voice.
 
 ## Constraints
 
-- ≤400 words total
+- 200–400 words total
 - Fantasy tone, consistent with Treebeard voice guide
 - No dev slang, sarcasm, exclamation marks, or bot self-reference
 - Use Markdown headings and bullet lists where appropriate
 - Mock comments should feel like real GitHub comments — formatted with
   backticks for code, mentioning specific packages/files via placeholders
 
-## Output Sections
+## Output Format (follow exactly)
 
-Hero, Features (×4), CTA
+Use these exact Markdown headings in this order:
+
+```
+## Hero
+(title and one-sentence description)
+
+## Features
+(four feature blocks with headlines, paragraphs, and mock comments)
+
+## CTA
+[Install Treebeard](/install)
+```
+
+The CTA **must** be a Markdown link: `[Label text](/path)`. Not plain text.

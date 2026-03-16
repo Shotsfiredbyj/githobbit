@@ -46,12 +46,28 @@ but must never obscure what the product costs or what you get.
 
 ## Constraints
 
-- Total ≤500 words
+- 200–500 words total
 - No dev slang, no bot self-reference
 - Use Markdown headings (`##`) for each section
 - Fantasy tone must not obscure pricing — the actual prices and feature
   differences must be scannable in under 10 seconds
 
-## Output Sections
+## Output Format (follow exactly)
 
-Hero, Tier Grid, FAQ, CTA
+Use these exact Markdown headings in this order:
+
+```
+## Hero
+(headline and one-sentence description)
+
+## Tier Grid
+(Markdown table with all four tiers)
+
+## FAQ
+(6 questions and answers)
+
+## CTA
+[Begin Your Journey](/signup)
+```
+
+The CTA **must** be a Markdown link: `[Label text](/path)`. Not plain text.

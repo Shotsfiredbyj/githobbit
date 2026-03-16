@@ -3,14 +3,14 @@
   "gates": [
     {
       "name": "item_count",
-      "description": "Batch must contain exactly the requested number of bot comment templates",
+      "description": "Batch must contain exactly 4 bot comment templates (one per trigger)",
       "check": "item_count",
       "params": {
-        "expected": "{count}",
+        "expected": "4",
         "item_pattern": "^\\d+\\."
       },
       "severity": "fail",
-      "error_message": "Expected {count} templates, found {actual}"
+      "error_message": "Expected 4 templates, found {actual}"
     },
     {
       "name": "word_count",
@@ -28,11 +28,11 @@
       "description": "Each template must contain at least one variable placeholder",
       "check": "min_matches",
       "params": {
-        "min": "{count}",
+        "min": "4",
         "pattern": "\\{[a-z_]+\\}"
       },
       "severity": "fail",
-      "error_message": "Only {actual} templates contain a variable placeholder (need {count})"
+      "error_message": "Only {actual} templates contain a variable placeholder (need 4)"
     },
     {
       "name": "no_dev_slang",

@@ -30,10 +30,23 @@ with a twinkle, not a stern lecture.
 
 ## Constraints
 
-- ≤100 words total
+- 30–100 words total
 - Fantasy tone, no dev slang, no bot self-reference
 - No exclamation marks
 
-## Output Sections
+## Output Format (follow exactly)
 
-Hero, Message, CTA
+Use these exact Markdown headings in this order:
+
+```
+## Hero
+(fantasy-flavoured headline)
+
+## Message
+(2–3 sentences, warm and whimsical)
+
+## CTA
+[Return to the Shire](/)
+```
+
+The CTA **must** be a Markdown link: `[Label text](/path)`. Not plain text.

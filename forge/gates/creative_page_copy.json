@@ -13,14 +13,14 @@
     },
     {
       "name": "word_count",
-      "description": "Page copy must not exceed 500 words",
+      "description": "Page copy must be 30–500 words",
       "check": "total_word_count",
       "params": {
-        "min_words": 50,
+        "min_words": 30,
         "max_words": 500
       },
       "severity": "fail",
-      "error_message": "Word count {actual} is outside range 50–500"
+      "error_message": "Word count {actual} is outside range 30–500"
     },
     {
       "name": "has_cta",

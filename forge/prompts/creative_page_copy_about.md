@@ -42,12 +42,31 @@ that's what makes it good."
 
 ## Constraints
 
-- ≤500 words total
+- 200–500 words total
 - Fantasy-flavoured but clear within 10 seconds
 - Use Markdown headings (`##`) for each section
 - No dev slang, no bot self-reference
 - The technical section should be honest about scope — don't oversell
 
-## Output Sections
+## Output Format (follow exactly)
 
-Hero, Overview, Technical, Team
+Use these exact Markdown headings in this order:
+
+```
+## Hero
+(title "The Legendarium" and tagline)
+
+## Overview
+(what GitHobbit is, ≈100 words)
+
+## Technical
+(the stack, ≈80 words)
+
+## Team
+(creator note, ≈60 words)
+
+## CTA
+[Explore GitHobbit](/)
+```
+
+The CTA **must** be a Markdown link: `[Label text](/path)`. Not plain text.

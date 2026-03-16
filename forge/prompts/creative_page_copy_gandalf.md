@@ -39,13 +39,26 @@ communicating status with a wizardly voice.
 
 ## Constraints
 
-- ≤500 words total
+- 200–500 words total
 - Fantasy tone, consistent with Gandalf voice
 - No dev slang, sarcasm, exclamation marks, or bot self-reference
 - Use Markdown headings and bullet lists
 - Mock comments should feel like real GitHub comments — formatted with
   backticks for code, mentioning specific files/modules via placeholders
 
-## Output Sections
+## Output Format (follow exactly)
 
-Hero, Features (×5), CTA
+Use these exact Markdown headings in this order:
+
+```
+## Hero
+(title and one-sentence description)
+
+## Features
+(five feature blocks with headlines, paragraphs, and mock comments)
+
+## CTA
+[Install Gandalf](/install)
+```
+
+The CTA **must** be a Markdown link: `[Label text](/path)`. Not plain text.

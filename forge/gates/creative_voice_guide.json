@@ -35,13 +35,13 @@
     },
     {
       "name": "no_dev_slang",
-      "description": "Voice guide must not contain common dev slang that breaks character",
+      "description": "Voice guide should avoid common dev slang that breaks character",
       "check": "no_match",
       "params": {
         "pattern": "(?i)\\b(LGTM|nit|ship it|PTAL|WFM|SGTM|TL;DR)\\b"
       },
-      "severity": "fail",
-      "error_message": "Dev slang detected: \"{match}\" — voice guides must stay in character"
+      "severity": "warn",
+      "error_message": "Dev slang detected: \"{match}\" — voice guides should stay in character (may appear in anti-pattern examples)"
     },
     {
       "name": "bot_self_reference",
