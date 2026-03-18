@@ -2,14 +2,15 @@
   "task_type": "code_worker",
   "gates": [
     {
-      "name": "single_code_block",
-      "description": "Response must contain exactly one fenced code block per file",
-      "check": "code_block_count",
+      "name": "has_code_blocks",
+      "description": "Response must contain at least 4 fenced code blocks (multi-file project)",
+      "check": "min_matches",
       "params": {
-        "expected": 1
+        "min": 4,
+        "pattern": "```"
       },
       "severity": "fail",
-      "error_message": "Expected 1 code block, found {actual}"
+      "error_message": "Expected at least 4 code fences (multi-file output), found {actual}"
     },
     {
       "name": "has_export",
