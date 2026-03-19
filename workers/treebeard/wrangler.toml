@@ -1,0 +1,15 @@
+name = "treebeard-bot"
+main = "index.ts"
+compatibility_date = "2024-01-01"
+workers_dev = true
+
+[vars]
+# These are development defaults. 
+# In production, use `wrangler secret put` or dashboard bindings.
+WEBHOOK_SECRET = "dev_secret_placeholder_do_not_use_in_prod"
+INSTALLATION_TOKEN = "ghp_dev_token_placeholder_do_not_use_in_prod"
+
+# Example for secrets (uncomment and run `wrangler secret put` for real secrets):
+# [secrets]
+# WEBHOOK_SECRET = "your_actual_webhook_secret"
+# INSTALLATION_TOKEN = "your_actual_installation_token"

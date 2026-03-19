@@ -1,0 +1,8 @@
+name = "gandalf-bot"
+main = "index.ts"
+compatibility_date = "2023-10-01"
+
+[vars]
+# Secrets should be injected via environment variables or secrets manager in production
+# WEBHOOK_SECRET = "placeholder"
+# INSTALLATION_TOKEN = "placeholder"
