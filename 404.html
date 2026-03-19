@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GitHobbit - Page Not Found</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+  <nav class="nav" id="shared-nav"></nav>
+
+  <!-- ── 404 ── -->
+  <section class="four-oh-four">
+    <h1>404</h1>
+    <h2 id="lost-title">You have strayed from the path</h2>
+    <p id="lost-message">The road you sought has vanished into the mists of old tales, leaving only silence where content should be. Fear not, for the main path to our home remains clear and ready to welcome you back.</p>
+    <a href="/" class="btn btn-gold" style="padding: 14px 32px; font-size: 1.05rem;">Return to the Shire</a>
+  </section>
+
+  <footer class="footer" id="shared-footer"></footer>
+
+  <script src="/js/components.js"></script>
+  <script src="/js/easter-eggs.js"></script>
+
+  <!-- Mordor Easter Egg: if URL contains "mordor" -->
+  <script>
+    if (window.location.href.toLowerCase().includes('mordor')) {
+      document.getElementById('lost-title').textContent = 'One does not simply navigate to Mordor';
+      document.getElementById('lost-message').textContent = 'You were warned. The path to Mordor is not a URL you can simply type into a browser. Turn back while you still can.';
+      document.body.classList.add('mordor-mode');
+    }
+  </script>
+
+</body>
+</html>
