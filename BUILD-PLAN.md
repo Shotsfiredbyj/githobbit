@@ -1,5 +1,10 @@
 # GitHobbit — Weekend Build Plan
 
+> **Dormant (banner added 2026-08-15).** No commits since 2026-03-19; the
+> plan below never executed past the static site. It depends on Arnor Forge
+> tooling and March-2026 fleet/model pins, both since superseded. Treat as
+> historical.
+
 ## Context
 
 GitHobbit is a fantasy-themed parody of GitHub, starting as a satirical landing
